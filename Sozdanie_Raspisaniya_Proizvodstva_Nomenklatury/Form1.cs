@@ -162,6 +162,24 @@ namespace Sozdanie_Raspisaniya_Proizvodstva_Nomenklatury
                 ++iRow;
             }
         }
+       
+        private void Form1_Load(object sender, EventArgs e)
+                {
+                    strOutFilename = System.IO.Directory.GetCurrentDirectory() + "\\" + strOutFilename;
+
+                    //поля результирующей таблицы
+                    dataGridView1.Columns.Add("TasksID", "Номер задачи");
+                    dataGridView1.Columns.Add("Nomenclature", "Номенклатура");
+                    dataGridView1.Columns.Add("Tool", "Слесарь");
+                    dataGridView1.Columns.Add("Begin", "Начало этапа обработки");
+                    dataGridView1.Columns.Add("End", "Конец этапа обработки");
+                    dataGridView1.Visible = false;
+
+                    //инициализация массивов
+                    arrNomenclatures = new ArrayList();
+                    arrTools = new ArrayList();
+                    arrSchedule = new ArrayList();
+                }
 
         private void btnReadFiles_Click(object sender, EventArgs e)
         {
@@ -316,6 +334,19 @@ namespace Sozdanie_Raspisaniya_Proizvodstva_Nomenklatury
                 ShowReport();
                 PrintResult();
                 btnExcel.Enabled = true;
+            }
+        }
+        
+        private void btnExcel_Click(object sender, EventArgs e)
+        {
+            //показываем проводник с выделенным выходным файлом
+            if (System.IO.File.Exists(strOutFilename))
+            {
+                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", " /select, " + strOutFilename + ""));
+            }
+            else
+            {
+                MessageBox.Show("Файл не был создан, либо уже удалён.", "Файл не найден", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
         }
 
@@ -518,36 +549,7 @@ namespace Sozdanie_Raspisaniya_Proizvodstva_Nomenklatury
         }
 
 
-        private void btnExcel_Click(object sender, EventArgs e)
-        {
-            //показываем проводник с выделенным выходным файлом
-            if (System.IO.File.Exists(strOutFilename))
-            {
-                System.Diagnostics.Process.Start(new System.Diagnostics.ProcessStartInfo("explorer.exe", " /select, " + strOutFilename + ""));
-            }
-            else
-            {
-                MessageBox.Show("Файл не был создан, либо уже удалён.", "Файл не найден", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
-            }
-
-        }
-
-        private void Form1_Load(object sender, EventArgs e)
-        {
-            strOutFilename = System.IO.Directory.GetCurrentDirectory() + "\\" + strOutFilename;
-
-            //поля результирующей таблицы
-            dataGridView1.Columns.Add("TasksID", "Номер задачи");
-            dataGridView1.Columns.Add("Nomenclature", "Номенклатура");
-            dataGridView1.Columns.Add("Tool", "Слесарь");
-            dataGridView1.Columns.Add("Begin", "Начало этапа обработки");
-            dataGridView1.Columns.Add("End", "Конец этапа обработки");
-            dataGridView1.Visible = false;
-
-            //инициализация массивов
-            arrNomenclatures = new ArrayList();
-            arrTools = new ArrayList();
-            arrSchedule = new ArrayList();
-        }
+    
+       
     }
 }
