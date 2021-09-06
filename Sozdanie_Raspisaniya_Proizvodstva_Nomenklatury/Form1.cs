@@ -257,6 +257,7 @@ namespace Sozdanie_Raspisaniya_Proizvodstva_Nomenklatury
                 btnCalc.Enabled = true;
                 btnExcel.Enabled = false;
             }
+
         }
 
         private void btnCalc_Click(object sender, EventArgs e)
@@ -445,6 +446,7 @@ namespace Sozdanie_Raspisaniya_Proizvodstva_Nomenklatury
                 catch (System.Exception ex)
                 {
                     MessageBox.Show("Внимание! Не удалось создать файл для записи результатов. Возможно, файл открыт в другой программе, или недостаточно прав для записи.", "Файл не создан", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
+                    //return;
                 }
             }
             XLWorkbook xlBook = new XLWorkbook();
@@ -505,6 +507,7 @@ namespace Sozdanie_Raspisaniya_Proizvodstva_Nomenklatury
             try
             {
                 xlBook.SaveAs(strFilename);
+                //System.Diagnostics.Process.Start(strFilename, "");
             }
             catch (System.Exception ex)
             {
@@ -527,6 +530,7 @@ namespace Sozdanie_Raspisaniya_Proizvodstva_Nomenklatury
             {
                 MessageBox.Show("Файл не был создан, либо уже удалён.", "Файл не найден", MessageBoxButtons.OK, MessageBoxIcon.Asterisk);
             }
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
