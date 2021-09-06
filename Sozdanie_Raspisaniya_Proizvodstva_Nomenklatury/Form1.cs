@@ -507,7 +507,6 @@ namespace Sozdanie_Raspisaniya_Proizvodstva_Nomenklatury
             try
             {
                 xlBook.SaveAs(strFilename);
-                //System.Diagnostics.Process.Start(strFilename, "");
             }
             catch (System.Exception ex)
             {
